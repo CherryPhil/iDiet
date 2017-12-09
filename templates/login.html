@@ -11,6 +11,7 @@
 		<link href="/static/css/login.css" rel="stylesheet">
 	</head>
 	<body>
+
 		<div id="textTopLeft">
 			<span class="glyphicon glyphicon-triangle-left"></span>
 			<a href="/" id="textTopText">&nbsp;Back to iDiet</a>
@@ -50,7 +51,7 @@
 						</div>
 					</div>
 					<div class="modal-body">
-						<form onsubmit="">
+						<form onsubmit="return checkForms()">
 							<div class="form-group">
 								<input type="email" class="form-control" required="required" placeholder="Email">
 							</div>
@@ -63,10 +64,10 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" required="required" placeholder="Password">
+								<input id="passwordNo1" type="password" class="form-control" required="required" placeholder="Password" value="">
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" required="required" placeholder="Confirm Password">
+								<input id="passwordNo2" type="password" class="form-control" required="required" placeholder="Confirm Password" value="">
 							</div>
 							<button id="modalBotButton" type="submit" class="btn">Get Started</button>
 						</form>
@@ -74,5 +75,8 @@
 				</div>
 			</div>
 		</div>
+
+        <script src="/static/js/login.js"></script>
+
 	</body>
 </html>
