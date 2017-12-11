@@ -7,10 +7,12 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="icon" href="/static/images/Board.png">
-		<link href="/static/css/login.css" rel="stylesheet">
+		<link rel="icon" href="{{ url_for("static", filename="images/Board.png") }}">
+		<link href="{{ url_for("static", filename="css/login.css") }}" rel="stylesheet">
 	</head>
 	<body>
+
+        {% from "includes/_formhelper.html" import render_field %}
 
 		<div id="textTopLeft">
 			<span class="glyphicon glyphicon-triangle-left"></span>
@@ -18,21 +20,25 @@
 		</div>
 		<div id="loginMiddle">
 			<a href="/">
-				<img id="loginLogo" src="/static/images/Logo Reverse.png">
+				<img id="loginLogo" src="{{ url_for("static", filename="images/Logo Reverse.png") }}">
 			</a>
-			<form action="/">
+
+
+			<form method="POST" action="">
 				<div class="inner-addon left-addon">
 					<i class="glyphicon glyphicon-user"></i>
-					<input class="inputForm" placeholder="Username" required="required" type="text" name="username" value="">
+					{{ render_field(form.username, class="inputForm", placeholder="Username", required="required") }}
 				</div>
 				<br/>
 				<div class="inner-addon left-addon">
 					<i class="glyphicon glyphicon-lock"></i>
-					<input class="inputForm" placeholder="Password" required="required" type="password" name="password" value="">
+					{{ render_field(form.password, class="inputForm", placeholder="Password", required="required")}}
 				</div>
 				<br/>
-				<button id="loginLogin" type="submit" class="btn btn-default">Sign In</button>
+				{{ render_field(form.login, class="btn btn-default", id="loginLogin", value="Sign In") }}
 			</form>
+
+
 			<span>
 				<span id="textBottomFirst">Not a member?&nbsp;</span>
 				<a id="textBottomSecond" data-toggle="modal" data-target="#registerModal">Sign up now&nbsp;<span class="glyphicon glyphicon-triangle-right"></span></a>
@@ -51,25 +57,20 @@
 						</div>
 					</div>
 					<div class="modal-body">
-						<form onsubmit="return checkForms()">
-							<div class="form-group">
-								<input type="email" class="form-control" required="required" placeholder="Email">
-							</div>
-							<div class="form-group row">
+						<form method="POST" action="" onsubmit="return CHECK2()">
+                            <span id="registerErrorMessage"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;Make sure both password are the same!</span>
+                            {{ render_field(regform.username, class="form-control", placeholder="Username", required="required") }}
+							<div class="row">
 								<div class="col-md-6">
-									<input type="text" class="form-control" required="required" placeholder="First Name">
+									{{ render_field(regform.firstname, class="form-control", placeholder="First Name", required="required") }}
 								</div>
 								<div class="col-md-6">
-									<input type="text" class="form-control" required="required" placeholder="Last Name">
+									{{ render_field(regform.lastname, class="form-control", placeholder="Last Name", required="required") }}
 								</div>
 							</div>
-							<div class="form-group">
-								<input id="passwordNo1" type="password" class="form-control" required="required" placeholder="Password" value="">
-							</div>
-							<div class="form-group">
-								<input id="passwordNo2" type="password" class="form-control" required="required" placeholder="Confirm Password" value="">
-							</div>
-							<button id="modalBotButton" type="submit" class="btn">Get Started</button>
+                            {{ render_field(regform.password, class="form-control", placeholder="Password", required="required", id="passwordNo1") }}
+                            {{ render_field(regform.conpassword, class="form-control", placeholder="Confirm Password", required="required", id="passwordNo2") }}
+							{{ render_field(regform.register, class="btn", id="modalBotButton", value="Get Started", onclick="CHECK()") }}
 						</form>
 					</div>
 				</div>
