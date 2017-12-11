@@ -18,5 +18,9 @@ def terms_and_conditions():
 def login():
     return render_template("login.html")
 
+@app.route('/recipe')
+def recipe():
+   return render_template('recipe.html')
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug = True)
