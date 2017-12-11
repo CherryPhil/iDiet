@@ -1,0 +1,22 @@
+.profile-pic {
+    max-width: 300px;
+    max-height: 300px;
+	min-width: 150px;
+	min-height: 150px;
+    display: block;
+}
+
+.upload-button {
+    padding: 4px;
+    border: 1px solid #0044cc;
+    border-radius: 5px;
+    display: block;
+    float: left;
+	color: white;
+	background-color: #006dcc;
+}
+
+div.move {
+	position:relative;
+	left:400px;
+}
