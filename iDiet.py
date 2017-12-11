@@ -26,5 +26,29 @@ def recipe():
 def health():
    return render_template('health.html')
 
+@app.route('/community')
+def community():
+    return render_template("community.html")
+
+@app.route('/community/general')
+def community_general():
+    return render_template("general.html")
+
+@app.route('/community/recipes')
+def community_recipes():
+    return render_template("recipes.html")
+
+@app.route('/community/contactus')
+def community_contactus():
+    return render_template("contactus.html")
+
+@app.route('/community/faq')
+def community_faq():
+    return render_template("faq.html")
+
+@app.route('/community/general/append')
+def community_general_append():
+    return render_template("append.html")
+
 if __name__ == '__main__':
     app.run(debug = True)
