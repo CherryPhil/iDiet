@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>iDiet</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="icon" href="images/Board.png">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/Home.css') }}">
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse" id="header" data-spy="affix" data-offset-top="1"><!--TOP-->
+			<div class="navbar-header" id="topLeft">
+				<a href="home.html">
+					<img id="logo" src="static/images/Logo Reverse.png">
+				</a>
+				<button id="collapse" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topRight">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>                        
+				</button>
+			</div>
+			
+			
+			<div class="collapse navbar-collapse navbar-right" id="topRight">
+				<ul class="nav navbar-nav" id="navList">
+					<li class="active1"><a href="home.html">Home</a></li>
+					<li><a href="recipe.html">Recipe</a></li>
+					<li><a href="health.html">My Health</a></li>	
+					<li><a href="fun.html">Fun</a></li>
+					<li><a href="community.html">Community</a></li>
+				</ul>
+				<button type="button" class="btn btn-default" id="loginButton">Sign In</button>
+			</div>
+		</nav>
+		
+	
+		<div><!--BODY-->
+			<div class="container" id="homeElephant"><!--SLIDESHOW-->
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+					<!-- Indicators -->
+					<ol class="carousel-indicators">
+					  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					  <li data-target="#myCarousel" data-slide-to="1"></li>
+					  <li data-target="#myCarousel" data-slide-to="2"></li>
+					  <li data-target="#myCarousel" data-slide-to="3"></li>
+					  <li data-target="#myCarousel" data-slide-to="4"></li>
+					</ol>
+
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" id="homeTiger">
+					  <div class="item active">
+						<img src="static/images/pic1.jpg">
+					  </div>
+
+					  <div class="item">
+						<img src="static/images/pic3.jpg">
+					  </div>
+					
+					  <div class="item">
+						<img src="static/images/pic2.png">
+					  </div>
+					  
+					  <div class="item">
+						<img src="static/images/pic5.jpg">
+					  </div>
+					  
+					  <div class="item">
+						<img src="static/images/pic4.jpg">
+					  </div>
+					</div>
+
+					<!-- Left and right controls -->
+					<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+					  <span class="glyphicon glyphicon-chevron-left"></span>
+					  <span class="sr-only">Previous</span>
+					</a>
+					<a class="right carousel-control" href="#myCarousel" data-slide="next">
+					  <span class="glyphicon glyphicon-chevron-right"></span>
+					  <span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+			<div class="container">
+				<div class="col-md-7">
+					<div class="row" id="homeRabbit"><!--About Us-->
+						<h2 style="color: white" align="middle">About Us</h2>
+						<div align="center">
+							<p style="color: white">We started on 15 October 2017.</p>
+							<p style="color: white">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
+							<p style="color: white">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
+							<p style="color: white">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
+						</div>
+					</div>
+					<div class="row"><!--News Announcement-->
+						<h2 style="color: white" align="middle">News Announcement</h2>
+						<div align="center">
+							<p style="color: white">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
+							<p style="color: white">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
+							<p style="color: white">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
+							<p style="color: white">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<div class="row" id="homeLion"><!--Update New Recipe-->
+						
+					</div>
+					<div class="row" id="homePanda"><!--Social Media Feed-->
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="container-fluid" id="bottomTop">
+			<div class="container">
+				<div class="col-md-3">
+					<ul id="contactList">
+						<li><strong>CONTACT US</strong></li>
+						<br/>
+						<li><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;39 Artillery Avenue, Sentosa<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Singapore 099958</li>
+						<br/>
+						<li><span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;+65 6823 9999</li>
+						</br>
+						<li><span class="glyphicon glyphicon-phone-alt"></span>&nbsp;&nbsp;+65 6448 9999</li>
+						<br/>
+						<li><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;<a id="bottomEmail" href="mailto:contactus@iDiet.com.sg">contactus@iDiet.com.sg</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<ul id="siteList">
+						<li><strong>SITEMAP</strong></li>
+						<br/>
+						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="recipe.html">Recipe</a></li>
+						<br/>
+						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="health.html">My Health</a></li>
+						<br/>
+						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="fun.html">Fun</a></li>
+						<br/>
+						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="announcements.html">Announcements</a></li>
+						<br/>
+						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="forums.html">Forums</a></li>
+						<br/>
+						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="support.html">Support</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<ul id="policiesList">
+						<li><strong>POLICIES</strong></li>
+						<br/>
+						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="terms&conditions.html">Terms & Conditions</a></li>
+						<br/>
+						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="privacy.html">Privacy</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<ul id="sponsorsList">
+						<li><strong>SPONSORS</strong></li>
+						<br/>
+						<li><img id="sponsors" src="images/sponsors.png"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid" id="bottomBot">
+			<div class="container">
+				<div class="col-md-6">
+					<ul id="socialList">
+						<li><strong>Follow Us On</strong></li>
+						<li><a target="_blank" href="https://www.facebook.com/">Facebook</a></li>
+						<li><a target="_blank" href="https://www.instagram.com/?hl=en">Instragram</a></li>
+						<li><a target="_blank" href="https://twitter.com/?lang=en">Twitter</a></li>
+					</ul>
+				</div>
+				<div class="col-md-4 col-md-offset-2">
+					<p id="copyright">Copyright © 2017 iDiet.com.sg. All rights reserved.</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
