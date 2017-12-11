@@ -1,54 +1,64 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, flash
+#Firebase
+import firebase_admin
+from firebase_admin import credentials, db
+
+from formLogin import LoginForm
+from formRegister import RegisterForm
+
+from objRegister import RegisterObject
+
+
+cred = credentials.Certificate('cred/idiet-229a2-firebase-adminsdk-f5ibn-9f138ec335.json')
+default_app = firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://idiet-229a2.firebaseio.com/'
+})
+
+root = db.reference()
+
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route("/")
 def home():
     return render_template("skeleton.html")
 
-@app.route('/privacy')
+@app.route("/fun")
+def fun():
+    return render_template("fun.html")
+
+@app.route("/privacy")
 def privacy():
     return render_template("privacy.html")
 
-@app.route('/terms&conditions')
+@app.route("/terms&conditions")
 def terms_and_conditions():
     return render_template("terms&conditions.html")
 
-@app.route('/login')
+@app.route("/login", methods=["POST","GET"])
 def login():
-    return render_template("login.html")
+    form = LoginForm(request.form)
+    regform = RegisterForm(request.form)
+    if request.method == "POST" and form.login.data:
+        return redirect(url_for('home'))
+    elif request.method == "POST" and regform.register.data:
+        username = regform.username.data
+        firstname = regform.firstname.data
+        lastname = regform.lastname.data
+        password = regform.password.data
 
-@app.route('/recipe')
-def recipe():
-   return render_template('recipe.html')
+        user = RegisterObject(username, firstname, lastname, password)
+        user_db = root.child("users")
+        user_db.push({
+            "username": user.get_username(),
+            "firstname": user.get_firstname(),
+            "lastname": user.get_lastname(),
+            "password": user.get_password()
+        })
+        return render_template("login.html", form=form, regform=regform)
 
-@app.route('/health')
-def health():
-   return render_template('health.html')
+    return render_template("login.html", form=form, regform=regform)
 
-@app.route('/community')
-def community():
-    return render_template("community.html")
-
-@app.route('/community/general')
-def community_general():
-    return render_template("general.html")
-
-@app.route('/community/recipes')
-def community_recipes():
-    return render_template("recipes.html")
-
-@app.route('/community/contactus')
-def community_contactus():
-    return render_template("contactus.html")
-
-@app.route('/community/faq')
-def community_faq():
-    return render_template("faq.html")
-
-@app.route('/community/general/append')
-def community_general_append():
-    return render_template("append.html")
-
-if __name__ == '__main__':
-    app.run(debug = True)
+if __name__ == "__main__":
+    app.secret_key = 'iDiet123'
+    app.run(debug=True)
