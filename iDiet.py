@@ -22,5 +22,9 @@ def login():
 def recipe():
    return render_template('recipe.html')
 
+@app.route('/health')
+def health():
+   return render_template('health.html')
+
 if __name__ == '__main__':
     app.run(debug = True)
