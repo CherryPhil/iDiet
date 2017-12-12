@@ -4,6 +4,7 @@ body{
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+	filter: blur(100%);
 }
 a:active, a:visited, a:link{
 	text-decoration: none;
@@ -39,7 +40,7 @@ a:active, a:visited, a:link{
 #collapse{
 	margin: 25px 10px 15px 0px;
 }
-@media (min-width: 0px) and (max-width: 890px) {
+@media (min-width: 0px) and (max-width: 910px) {
     .navbar-collapse.collapse {
         display: none !important;
     }
@@ -119,7 +120,7 @@ a:active, a:visited, a:link{
 }
 
 
-.glyphicon-menu-right{
+#bottomTop .glyphicon-menu-right{
 	color: #FF7200;
 }
 #siteList, #policiesList{
