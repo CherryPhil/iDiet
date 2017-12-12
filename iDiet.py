@@ -35,6 +35,14 @@ def privacy():
 def terms_and_conditions():
     return render_template("terms&conditions.html")
 
+@app.route("/health")
+def health():
+    return render_template("health.html")
+
+@app.route("/recipe")
+def recipe():
+    return render_template("recipe.html")
+
 @app.route("/login", methods=["POST","GET"])
 def login():
     form = LoginForm(request.form)
