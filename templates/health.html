@@ -10,6 +10,8 @@
 		<link rel="icon" href="images/Board.png">
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/health.css') }}">
+        <script type="text/javascript" src="static/js/graph.js"></script>
+
 	</head>
 	<body>
 	
@@ -43,58 +45,27 @@
 			<img src ="static/images/running1.jfif" style="width:100%;">
 			&nbsp;
 			<div class="bmi">
-				<script type="text/javascript">
 
-					function computeBMI() {
-						// user inputs
-						var height = Number(document.getElementById("height").value);
-						var weight = Number(document.getElementById("weight").value);
-
-						//Perform calculation
-
-						//        var BMI = weight /Math.pow(height, 2)*10000;
-						var BMI = Math.round(weight / Math.pow(height, 2) * 10000);
-
-						//Display result of calculation
-						document.getElementById("output").innerText = Math.round(BMI * 100) / 100;
-
-						var output = Math.round(BMI * 100) / 100
-						if (output < 18.5)
-							document.getElementById("comment").innerText = "Underweight";
-						else if (output >= 18.5 && output <= 25)
-							document.getElementById("comment").innerText = "Normal";
-						else if (output >= 25 && output <= 30)
-							document.getElementById("comment").innerText = "Obese";
-						else if (output > 30)
-							document.getElementById("comment").innerText = "Overweight";
-						// document.getElementById("answer").value = output; 
-					}
-				</script>
+				<script type="text/javascript" src="static/js/bmi.js"></script>
 
 				<h1> BMI Calculator </h1>
 				<p>Enter your height (cm): <input type="text" id="height" multiple/></p>
 				<p>Enter your weight( kg): <input type="text" id="weight" multiple/></p>
 				<input type="submit" value="Calculate" onclick="computeBMI();">
-				<h1>BMI: <span id="output">?</span></h1>
+				<h1>Body Mass Index: <span id="output">?</span></h1>
+				<h2><span id="comment"></span></h2>
+                Week:<input id="xValue" type="number" step="any" placeholder=" No. ?">
+                <button id="renderButton">Update BMI</button>
 
-				<h2><span id="comment"></span></h2> 
 			</div>
-			
-			<h1>Some text to enable scrolling</h1>
-			<h1>Some text to enable scrolling</h1>
-			<h1>Some text to enable scrolling</h1>
-			<h1>Some text to enable scrolling</h1>
-			<h1>Some text to enable scrolling</h1>
-			<h1>Some text to enable scrolling</h1>
-			<h1>Some text to enable scrolling</h1>
-			<h1>Some text to enable scrolling</h1>
-			<h1>Some text to enable scrolling</h1>
-			<h1>Some text to enable scrolling</h1>
-			<h1>Some text to enable scrolling</h1>
-			<h1>Some text to enable scrolling</h1>
+            <br><br>
+
+            <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div><br><br>
+            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 		</div>
 		
-		{%  include 'includes/_footer.html' %}
+		{% include 'includes/_footer.html' %}
 
 	</body>
 </html>
