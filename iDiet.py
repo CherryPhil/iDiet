@@ -47,8 +47,20 @@ def recipe():
 def login():
     form = LoginForm(request.form)
     regform = RegisterForm(request.form)
+
+    users = root.child("users").get()
+
     if request.method == "POST" and form.login.data:
-        return redirect(url_for('home'))
+        username = form.username.data
+        password = form.password.data
+
+        for userid in users:
+            userDetail = users[userid]
+            if userDetail["username"] == username and userDetail["password"] == password:
+                return redirect(url_for('home'))
+        error="Please check your Username and Password."
+        return render_template("login.html", form=form, regform=regform, checkuser=users, error=error)
+
     elif request.method == "POST" and regform.register.data:
         username = regform.username.data
         firstname = regform.firstname.data
@@ -63,9 +75,9 @@ def login():
             "lastname": user.get_lastname(),
             "password": user.get_password()
         })
-        return render_template("login.html", form=form, regform=regform)
+        return render_template("login.html", form=form, regform=regform, checkuser=users)
 
-    return render_template("login.html", form=form, regform=regform)
+    return render_template("login.html", form=form, regform=regform, checkuser=users)
 
 if __name__ == "__main__":
     app.secret_key = 'iDiet123'
