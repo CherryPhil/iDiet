@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
 
     <script type="text/javascript">//<![CDATA[
-			window.onload=function(){
+	window.onload=function(){
 
 			var list = document.getElementById('list');
 			var add = document.getElementById('add');
@@ -34,6 +34,25 @@
 				}
 			});
 
+	}
+	</script>
+	<script type="text/javascript">
+		function myFunction() {
+		  var input, filter, table, tr, td, i;
+		  input = document.getElementById("myInput");
+		  filter = input.value.toUpperCase();
+		  table = document.getElementById("myTable");
+		  tr = table.getElementsByTagName("tr");
+		  for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[1];
+			if (td) {
+			  if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			  } else {
+				tr[i].style.display = "none";
+			  }
+			}
+		  }
 		}
 	</script>
 </head>
@@ -90,29 +109,66 @@
 		</div>
 
 		<div style="margin-left:40%;padding:1px 16px;height:600px;">
-			<form><input class="search" type="text" name="search" placeholder="Search.."></form>
+			<form><input class="search" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for food"></form>
 			<h2 style="color: white; font-weight: bold;">Welcome to Recipe</h2>
 			<div class="recipe_box">
 				<div class="recipe_box1">
 					<div class="container">
-					  <div class="row">
-						<div class="col-sm-3"><div class="food"><div class='PnT'><img id="photo" src="static/images/Scrambled-Eggs.png"><br>Scrambled Eggs</div>
-							<p style="color:red; font-weight:bold;" class="Des">Lack: Salt</p>
-							<p class="Des1"><span><img id="Cook" src="static/images/Cook.png"></span> Prep: 5 min.<br><span><img id="Cook1" src="static/images/Cook1.png"></span>Cook: 10 min.</p></div>
-						</div>
-						<div class="col-sm-3"><div class="food"><div class='PnT'><img id="photo" src="static/images/Scrambled-Eggs.png"><br>Scrambled Eggs</div><p style="color:red; font-weight:bold;" class="Des">Lack: Salt</p></div></div>
-						<div class="col-sm-3"><div class="food"><div class='PnT'><img id="photo" src="static/images/Scrambled-Eggs.png"><br>Scrambled Eggs</div><p style="color:red; font-weight:bold;" class="Des">Lack: Salt</p></div></div>
-					  </div>
-					  <div class="row">
-						<div class="col-sm-3"><div class="food"><div class='PnT'><img id="photo" src="static/images/Scrambled-Eggs.png"><br>Scrambled Eggs</div><p style="color:red; font-weight:bold;" class="Des">Lack: Salt</p></div></div>
-						<div class="col-sm-3"><div class="food"><div class='PnT'><img id="photo" src="static/images/Scrambled-Eggs.png"><br>Scrambled Eggs</div><p style="color:red; font-weight:bold;" class="Des">Lack: Salt</p></div></div>
-						<div class="col-sm-3"><div class="food"><div class='PnT'><img id="photo" src="static/images/Scrambled-Eggs.png"><br>Scrambled Eggs</div><p style="color:red; font-weight:bold;" class="Des">Lack: Salt</p></div></div>
-					  </div>
-					  <div class="row">
-						<div class="col-sm-3"><div class="food"><div class='PnT'><img id="photo" src="static/images/Scrambled-Eggs.png"><br>Scrambled Eggs</div><p style="color:red; font-weight:bold;" class="Des">Lack: Salt</p></div></div>
-						<div class="col-sm-3"><div class="food"><div class='PnT'><img id="photo" src="static/images/Scrambled-Eggs.png"><br>Scrambled Eggs</div><p style="color:red; font-weight:bold;" class="Des">Lack: Salt</p></div></div>
-						<div class="col-sm-3"><div class="food"><div class='PnT'><img id="photo" src="static/images/Scrambled-Eggs.png"><br>Scrambled Eggs</div><p style="color:red; font-weight:bold;" class="Des">Lack: Salt</p></div></div>
-					  </div>
+						<table id="myTable">
+							<thead>
+							  <tr class="header">
+								<th style="width:10%;">Photo</th>
+								<th style="width:30%;">Food</th>
+								<th style="width:20%;"><img id="Cook" src="static/images/Cook.png">Prep.</th>
+								<th style="width:20%;"><img id="Cook1" src="static/images/Cook1.png">Cook</th>
+								<th style="width:20%;">Lack</th>
+							  </tr>
+							</thead>
+							<tbody id="myTable1">
+							  <tr onclick="location.href='http://yahoo.com';">
+								  <td><img id="photo" src="static/images/food/Scrambled-Eggs.png"></td>
+								  <td>Scamble Eggs</td>
+								  <td>5 mins</td>
+								  <td>10 mins</td>
+								  <td>Example: Salt</td>
+							  </tr>
+							  <tr>
+								  <td><img id="photo" src="static/images/food/beef-burger.png"></td>
+								  <td>Beef Burger</td>
+								  <td>15 mins</td>
+								  <td>23 mins</td>
+								  <td>Example: Onion</td>
+							  </tr>
+							  <tr>
+								  <td><img id="photo" src="static/images/food/maple-salmon.png"></td>
+								  <td>Maple Salmon</td>
+								  <td>10 mins</td>
+								  <td>20 mins</td>
+								  <td>Good to go</td>
+							  </tr>
+							  <tr>
+								  <td><img id="photo" src="static/images/food/unbelievable-chicken.png"></td>
+								  <td>Unbelievable Chicken</td>
+								  <td>15 mins</td>
+								  <td>20 mins</td>
+								  <td>Good to go</td>
+							  </tr>
+							  <tr>
+								  <td><img id="photo" src="static/images/food/strawberry-spinach-salad.png"></td>
+								  <td>Strawberry Spinach Salad</td>
+								  <td>10 mins</td>
+								  <td>0 mins</td>
+								  <td>Good to go</td>
+							  </tr>
+							  <tr>
+								  <td><img id="photo" src="static/images/food/braised-balsamic-chicken.png"></td>
+								  <td>Braised Balsamic Chicken</td>
+								  <td>10 mins</td>
+								  <td>20 mins</td>
+								  <td>Good to go</td>
+							  </tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
