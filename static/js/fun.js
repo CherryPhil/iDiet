@@ -35,22 +35,50 @@ var question_choice3 = [["Carbohydrates, Lipids (fats), and Proteins", "Vitamins
                         ["1: Fat content, 2: Calorie content, 3: Serving size", "1: Serving size, 2: Servings per container, 3: Carbohydrate content", "1: Fat content, 2: Servings size, 3: Servings per container", "1: Serving size, 2: Fat content, 3: Servings per container"]
                         ];
 
+var challengeScore1 = -1;
+var challengeScore2 = -1;
+var challengeScore3 = -1;
+
+function setCha1_2_3(cha1, cha2, cha3){
+    challengeScore1 = cha1;
+    challengeScore2 = cha2;
+    challengeScore3 = cha3;
+}
+
 var questions = question;
 var question_choices = question_choice;
 
 $("#challengeButton").click(function(){
     questions = question;
     question_choices = question_choice;
+    $("#challengeNumber").text("1");
+    if(challengeScore1 == -1){
+        $("#showScore").text("No previous records")
+    }else{
+        $("#showScore").text("Your highest score: "+challengeScore1+"/5")
+    }
     restartFunc();
 });
 $("#challengeButton2").click(function(){
     questions = question2;
     question_choices = question_choice2;
+    $("#challengeNumber").text("2");
+    if(challengeScore2 == -1){
+        $("#showScore").text("No previous records")
+    }else{
+        $("#showScore").text("Your highest score: "+challengeScore2+"/5")
+    }
     restartFunc();
 });
 $("#challengeButton3").click(function(){
     questions = question3;
     question_choices = question_choice3;
+    $("#challengeNumber").text("3");
+    if(challengeScore3 == -1){
+        $("#showScore").text("No previous records")
+    }else{
+        $("#showScore").text("Your highest score: "+challengeScore3+"/5")
+    }
     restartFunc();
 });
 
@@ -99,6 +127,16 @@ function hi(){
     }
     if (count == 4) {
         alert("Congratulation! You have done the challenge, you got " + score + " question correct!!");
+        $.getJSON("/userScoreProcess",
+            {userScore: score, Qnum: $("#challengeNumber").text()},
+            function(data){
+            if($("#challengeNumber").text() == 1){
+                challengeScore1 = data;
+            }else if($("#challengeNumber").text() == 2){
+                challengeScore2 = data;
+            }else{
+                challengeScore3 = data;
+            }});
         $('#challengeModal').modal("toggle");
     }
 
