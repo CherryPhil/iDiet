@@ -43,20 +43,20 @@
 			<div class="container title">
 				<h1>&nbsp </h1>
 				<h3>&nbsp </h3>
-				<p style="font-size:20px;color: white;"><a href="community.html">Forums</a> > General Discussion </p>
+				<p style="font-size:20px;color: white;"><a href="/community">Forums</a> > General Discussion </p>
 				<h1>&nbsp </h1>
-					<div class="col-md-12 post">
-						<p style="font-size: 24px"> Need advice for losing weight! </p>
-					</div>
-				<div class="col-md-12 post">
-					<p style="font-size: 24px"> &nbsp  </p>
-				</div>
-				<div class="col-md-12 post">
-					<p style="font-size: 24px"> &nbsp  </p>
-				</div>
-				<div class="col-md-12 post">
-					<p style="font-size: 24px"> &nbsp  </p>
-				</div>
+                <a href="/community/general/post">
+                    <p class="btn btn-default" style="float: right;"> Post </p>
+                </a>
+				<h1>&nbsp </h1>
+                {% for i in title %}
+                    <a href="{{ url_for('append', title_url=i) }}">
+                        <div class="col-md-12 post">
+					        <p style="font-size: 24px"> {{ i }}  </p>
+				        </div>
+                    </a>
+                {% endfor %}
+				<h1> {{ generals }} </h1>
 				<h1>&nbsp </h1>
 				<h1>&nbsp </h1>
 				<h1>&nbsp </h1>
