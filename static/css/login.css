@@ -14,7 +14,7 @@ a:active, a:visited, a:link{
 	margin: 20px 0px 0px 20px;
 	font-size: 15px;
 }
-.glyphicon{
+.glyphicon-triangle-right, .glyphicon-triangle-left{
 	color: #FF7200;
 }
 #textTopText{
@@ -28,6 +28,10 @@ a:active, a:visited, a:link{
 }
 
 /*Middle*/
+#errorMessage{
+	color: red;
+	font-weight: bold;
+}
 #loginMiddle{
 	text-align: center;
 	margin-top: 50px;
@@ -108,6 +112,10 @@ a:active, a:visited, a:link{
 	margin-bottom: 0px;
 }
 
+#registerErrorMessage, #usernameErrorMessage{
+	color: red;
+	display: none;
+}
 #modalBotButton{
 	width: 100%;
 	transition: all .3s ease-in-out;

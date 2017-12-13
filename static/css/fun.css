@@ -1,0 +1,98 @@
+/*Image*/
+#funTop{
+	position: relative;
+}
+#funTopImage{
+	width: 100%;
+}
+#funTopTextBox{
+	position: absolute;
+	left: 80%;
+	top: 20%;
+}
+#funTopText{
+	color: #FF7200;
+	letter-spacing: -1px;
+	font-size: 5vw;
+}
+
+/*Main*/
+#mainBox{
+	background-color: #E0E0E0;
+}
+
+/*Main 1*/
+#mainFun1{
+
+}
+
+/*Main 2*/
+#mainFun2{
+
+}
+
+/*Main 3*/
+#mainFun3{
+	text-align: center;
+	background-color: #A0A0A0;
+}
+#challengeButton, #challengeButton2, #challengeButton3{
+	background: 0 0;
+	background-color: #404040;
+	padding: 10px 50px;
+	margin: 60px 20px 15px 20px;
+	border-radius: 40px;
+	color: white;
+	border-color: white;
+    transition: all .2s ease-in-out;
+}
+#challengeButton:hover, #challengeButton2:hover, #challengeButton3:hover {
+	background-color: #FF8000;
+	color: white;
+	border-color: white;
+}
+#mainFun3Text{
+	font-weight: bold;
+	font-size: 20px;
+	padding-bottom: 60px;
+	margin-bottom: 0px;
+}
+
+/*Modal*/
+#challengeModal{
+	padding-top: 100px;
+}
+#modalTop{
+	text-align: center;
+}
+#modalTopClose:hover{
+	color: #FF7200;
+}
+#modalTopText1{
+	font-size: 20px;
+}
+
+#errorMessage{
+	color: red;
+	display: none;
+}
+#modalBodyText{
+	color: #FF7200;
+	font-size: 16px;
+}
+#modalBodyNext{
+	width: 100%;
+	transition: all .3s ease-in-out;
+}
+#modalBodyNext:hover{
+	color: white;
+	background-color: #FF7200;
+	transition: all .3s ease-in-out;
+}
+#modalBodyNext:focus{
+	outline: none;
+}
+
+#modalProgress{
+	width: 0%;
+}
