@@ -54,13 +54,13 @@
 				<input type="submit" value="Calculate" onclick="computeBMI();">
 				<h1>Body Mass Index: <span id="output">?</span></h1>
 				<h2><span id="comment"></span></h2>
-                Week:<input id="xValue" type="number" step="any" placeholder=" No. ?">
-                <button id="renderButton">Update BMI</button>
 
 			</div>
             <br><br>
 
-            <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div><br><br>
+            <div id="chartContainer" style="width:100%; height:280px"></div>
+            Enter Updated BMI: <input id="newdp" type="number">
+            <button id="addDataPoint">Add Data Point</button><br><br>
             <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 		</div>
