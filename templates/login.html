@@ -25,6 +25,7 @@
 
 
 			<form method="POST" action="">
+                <span id="errorMessage">{{ error }}</span>
 				<div class="inner-addon left-addon">
 					<i class="glyphicon glyphicon-user"></i>
 					{{ render_field(form.username, class="inputForm", placeholder="Username", required="required") }}
@@ -58,19 +59,20 @@
 					</div>
 					<div class="modal-body">
 						<form method="POST" action="" onsubmit="return CHECK2()">
+                            <span id="usernameErrorMessage"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;Username already exist!</span>
                             <span id="registerErrorMessage"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;Make sure both password are the same!</span>
-                            {{ render_field(regform.username, class="form-control", placeholder="Username", required="required") }}
+                            {{ render_field(regform.username, class="form-control", placeholder="Username", required="required", onchange="runCheck(this)") }}
 							<div class="row">
 								<div class="col-md-6">
 									{{ render_field(regform.firstname, class="form-control", placeholder="First Name", required="required") }}
 								</div>
 								<div class="col-md-6">
-									{{ render_field(regform.lastname, class="form-control", placeholder="Last Name", required="required") }}
+									{{ render_field(regform.lastname, class="form-control", placeholder="Last Name") }}
 								</div>
 							</div>
-                            {{ render_field(regform.password, class="form-control", placeholder="Password", required="required", id="passwordNo1") }}
-                            {{ render_field(regform.conpassword, class="form-control", placeholder="Confirm Password", required="required", id="passwordNo2") }}
-							{{ render_field(regform.register, class="btn", id="modalBotButton", value="Get Started", onclick="CHECK()") }}
+                            {{ render_field(regform.password, class="form-control", placeholder="Password", required="required", id="passwordNo1", onchange="CHECK()") }}
+                            {{ render_field(regform.conpassword, class="form-control", placeholder="Confirm Password", required="required", id="passwordNo2", onchange="CHECK()") }}
+							{{ render_field(regform.register, class="btn", id="modalBotButton", value="Get Started") }}
 						</form>
 					</div>
 				</div>
@@ -78,6 +80,19 @@
 		</div>
 
         <script src="/static/js/login.js"></script>
+        <script>
+            function runCheck(deInput){
+                var users = {{ checkuser|safe }};
+                for(var userId in users){
+                    var userDetail = users[userId];
+                    if (userDetail["username"] == deInput.value){
+                        $("#usernameErrorMessage").css("display", "block");
+                        return
+                    }
+                }
+                $("#usernameErrorMessage").css("display", "none");
+            }
+        </script>
 
 	</body>
 </html>
