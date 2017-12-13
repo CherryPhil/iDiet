@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for
 #Firebase
 import firebase_admin
 from firebase_admin import credentials, db
@@ -45,6 +45,7 @@ def recipe():
 
 @app.route("/login", methods=["POST","GET"])
 def login():
+    session.pop("logged_in", None)
     form = LoginForm(request.form)
     regform = RegisterForm(request.form)
 
@@ -57,6 +58,7 @@ def login():
         for userid in users:
             userDetail = users[userid]
             if userDetail["username"] == username and userDetail["password"] == password:
+                session["logged_in"] = userid
                 return redirect(url_for('home'))
         error="Please check your Username and Password."
         return render_template("login.html", form=form, regform=regform, checkuser=users, error=error)
