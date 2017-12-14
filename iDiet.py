@@ -41,7 +41,12 @@ def health():
 
 @app.route("/recipe")
 def recipe():
-    return render_template("recipe.html")
+    database_recipes = root.child('recipe').get()
+    name = []
+    for i in database_recipes:
+        recipe_detail = database_recipes[i]
+        name.append(recipe_detail)
+    return render_template('recipe.html', name=name)
 
 @app.route("/login", methods=["POST","GET"])
 def login():
