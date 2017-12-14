@@ -17,3 +17,13 @@ p{
 .post>p{
 	color: white;
 }
+
+.head{
+	font-size: 36px;
+	color: white;
+}
+
+.textarea{
+	height: 100px;
+	font-size: 20px;
+}
