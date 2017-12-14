@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/recipe_decor.css') }}">
-    <link rel="icon" href="images/Board.png">
+    <link rel="icon" href="static/images/Board.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
 
     <script type="text/javascript">//<![CDATA[
@@ -55,6 +55,50 @@
 		  }
 		}
 	</script>
+	<script>
+		filterSelection("all")
+		function filterSelection(c) {
+		  var x, i;
+		  x = document.getElementsByClassName("filterDiv");
+		  if (c == "all") c = "";
+		  for (i = 0; i < x.length; i++) {
+			w3RemoveClass(x[i], "show");
+			if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+		  }
+		}
+
+		function w3AddClass(element, name) {
+		  var i, arr1, arr2;
+		  arr1 = element.className.split(" ");
+		  arr2 = name.split(" ");
+		  for (i = 0; i < arr2.length; i++) {
+			if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+		  }
+		}
+
+		function w3RemoveClass(element, name) {
+		  var i, arr1, arr2;
+		  arr1 = element.className.split(" ");
+		  arr2 = name.split(" ");
+		  for (i = 0; i < arr2.length; i++) {
+			while (arr1.indexOf(arr2[i]) > -1) {
+			  arr1.splice(arr1.indexOf(arr2[i]), 1);
+			}
+		  }
+		  element.className = arr1.join(" ");
+		}
+
+		// Add active class to the current button (highlight it)
+		var btnContainer = document.getElementById("myBtnContainer");
+		var btns = btnContainer.getElementsByClassName("btn");
+		for (var i = 0; i < btns.length; i++) {
+		  btns[i].addEventListener("click", function(){
+			var current = document.getElementsByClassName("active");
+			current[0].className = current[0].className.replace(" active", "");
+			this.className += " active";
+		  });
+		}
+	</script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse" id="header" data-spy="affix" data-offset-top="1"><!--TOP-->
@@ -89,17 +133,19 @@
 			<ul class='hi'>
 				<li style="text-align:center;">Ingredient: <input type="text" style="text-align:center;" id="ingredient"/><input type="button" id="add" value="Add"></li>
 				<li>
-					<div class="choice">
+					<div class="choice" id="myBtnContainer">
 					Healthy Food:
-					<label><input type="radio" name="choice1" value="yes"> YES</label>
-					<label><input type="radio" name="choice1" value="no"> NO</label>
+					<label><button class="btn active" id="filter" onclick="filterSelection('all')"> All</button></label>
+					<label><button class="btn" id="filter" onclick="filterSelection('Yes')"> Yes</button></label>
+					<label><button class="btn" id="filter" onclick="filterSelection('No')"> No</button></label>
 					</div>
 				</li>
 				<li>
 					<div class="choice">
 						Time to prepare:
-						<label><input type="radio" name="choice2" value="fast"> Fast</label>
-						<label><input type="radio" name="choice2" value="normal"> Normal</label>
+						<label><input type="radio" name="choice2" value="all1"> ALL</label>
+						<label><input type="radio" name="choice2" value="fast"> FAST</label>
+						<label><input type="radio" name="choice2" value="normal"> NORMAL</label>
 					</div>
 				</li>
 				<div class="hi3">
@@ -121,52 +167,19 @@
 								<th style="width:30%;">Food</th>
 								<th style="width:20%;"><img id="Cook" src="static/images/Cook.png">Prep.</th>
 								<th style="width:20%;"><img id="Cook1" src="static/images/Cook1.png">Cook</th>
-								<th style="width:20%;">Lack</th>
+								<th style="width:20%;">Calories(/100g)</th>
 							  </tr>
 							</thead>
 							<tbody id="myTable1">
-							  <tr onclick="location.href='http://yahoo.com';">
-								  <td><img id="photo" src="static/images/food/Scrambled-Eggs.png"></td>
-								  <td>Scamble Eggs</td>
-								  <td>5 mins</td>
-								  <td>10 mins</td>
-								  <td>Example: Salt</td>
-							  </tr>
-							  <tr>
-								  <td><img id="photo" src="static/images/food/beef-burger.png"></td>
-								  <td>Beef Burger</td>
-								  <td>15 mins</td>
-								  <td>23 mins</td>
-								  <td>Example: Onion</td>
-							  </tr>
-							  <tr>
-								  <td><img id="photo" src="static/images/food/maple-salmon.png"></td>
-								  <td>Maple Salmon</td>
-								  <td>10 mins</td>
-								  <td>20 mins</td>
-								  <td>Good to go</td>
-							  </tr>
-							  <tr>
-								  <td><img id="photo" src="static/images/food/unbelievable-chicken.png"></td>
-								  <td>Unbelievable Chicken</td>
-								  <td>15 mins</td>
-								  <td>20 mins</td>
-								  <td>Good to go</td>
-							  </tr>
-							  <tr>
-								  <td><img id="photo" src="static/images/food/strawberry-spinach-salad.png"></td>
-								  <td>Strawberry Spinach Salad</td>
-								  <td>10 mins</td>
-								  <td>0 mins</td>
-								  <td>Good to go</td>
-							  </tr>
-							  <tr>
-								  <td><img id="photo" src="static/images/food/braised-balsamic-chicken.png"></td>
-								  <td>Braised Balsamic Chicken</td>
-								  <td>10 mins</td>
-								  <td>20 mins</td>
-								  <td>Good to go</td>
-							  </tr>
+							{% for i in name %}
+								  <tr onclick="location.href='{{i['steps']}}';">
+									  <td><img id="photo" src="static/images/food/{{i['photo']}}"></td>
+									  <td>{{i['name']}}</td>
+									  <td>{{i['prep']}}</td>
+									  <td>{{i['cook']}}</td>
+									  <td style="text-align: center">{{i['cal']}}</td>
+								  </tr>
+							{% endfor %}
 							</tbody>
 						</table>
 					</div>
