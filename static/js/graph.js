@@ -27,14 +27,15 @@ window.onload = function () {
 
 	$("#addDataPoint").click(function () {
 
-	var length = chart.options.data[0].dataPoints.length;
 	chart.options.title.text = "Your BMI Progress";
-	chart.options.data[0].dataPoints.push({y:parseInt(document.getElementById("newdp").value)});
-	chart.render();
-
-
+	if ($("#newdp").val() == 0) {
+        alert("No Input Detected")
+    }
+	else {
+        chart.options.data[0].dataPoints.push({y: parseInt(document.getElementById("newdp").value)});
+        chart.render();
+    }
 	});
 
 };
-
 
