@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="js/ingredient_list.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/recipe_decor.css') }}">
     <link rel="icon" href="static/images/Board.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
@@ -55,7 +56,7 @@
 		  }
 		}
 	</script>
-	<script>
+	<script type="text/javascript">
 		filterSelection("all")
 		function filterSelection(c) {
 		  var x, i;
@@ -143,9 +144,9 @@
 				<li>
 					<div class="choice">
 						Time to prepare:
-						<label><input type="radio" name="choice2" value="all1"> ALL</label>
-						<label><input type="radio" name="choice2" value="fast"> FAST</label>
-						<label><input type="radio" name="choice2" value="normal"> NORMAL</label>
+						<label><button class="btn active" id="filter" onclick="filterSelection('all')"> All</button></label>
+					    <label><button class="btn" id="filter" onclick="filterSelection('Yes')"> Fast</button></label>
+						<label><button class="btn" id="filter" onclick="filterSelection('No')"> Normal</button></label>
 					</div>
 				</li>
 				<div class="hi3">
