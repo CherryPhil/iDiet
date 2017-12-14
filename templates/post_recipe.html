@@ -7,13 +7,14 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="icon" href="/static/images/Board.png">
+		<link rel="icon" href="images/Board.png">
 		<link href="/static/css/skeleton.css" rel="stylesheet">
 		<link href="/static/css/community.css" rel="stylesheet">
 		<link href="/static/css/forums.css" rel="stylesheet">
+
 	</head>
 	<body>
-	
+        {% from "includes/_formhelper.html" import render_field %}
 		<nav class="navbar navbar-inverse" id="header" data-spy="affix" data-offset-top="1"><!--TOP-->
 			<div class="navbar-header" id="topLeft">
 				<a href="home.html">
@@ -22,16 +23,16 @@
 				<button id="collapse" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topRight">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>                        
+					<span class="icon-bar"></span>
 				</button>
 			</div>
-			
-			
+
+
 			<div class="collapse navbar-collapse navbar-right" id="topRight">
 				<ul class="nav navbar-nav" id="navList">
 					<li><a href="home.html">Home</a></li>
 					<li><a href="recipe.html">Recipe</a></li>
-					<li><a href="health.html">My Health</a></li>	
+					<li><a href="health.html">My Health</a></li>
 					<li><a href="fun.html">Fun</a></li>
 					<li class="active1"><a href="community.html">Community</a></li>
 				</ul>
@@ -43,38 +44,25 @@
 			<div class="container title">
 				<h1>&nbsp </h1>
 				<h3>&nbsp </h3>
-				<p style="font-size:20px;color: white;"><a href="/community">Forums</a> > <a href="/community/general"> General Discussion </a> > New recipes </p>
-				<h3>&nbsp </h3>
-				<img src="/static/images/board.png" alt="board" width="128px" style="float: left;"/>
-				<p class="head"> {{ titled }} </p>
-				<p>&nbsp </p>
-				<hr/>
+				<p style="font-size:20px;color: white;"><a href="/community">Forums</a> > <a href="/community/general"> General Discussion </a> > Post </p>
 				<h1>&nbsp </h1>
-				<img src="/static/images/phileo.jpg" alt="PROFILE" style="float: left; border: 1px solid white; width: 96px;height: 96px;" />
-				<p> &nbsp Phileo Teo </p>
-				<p style="font-size: 16px; font-weight: bold;"> &nbsp Developer </p>
-				<p>&nbsp </p>
-				<p> 12 December 2017 </p>
-				<h1>&nbsp </h1>
-					<p>
-					    {{ commented }}
-					</p>
-				<h1>&nbsp </h1>
-				<hr/>
-				<h1>&nbsp </h1>
-				<label for="comments"> <p> Comments </p> </label>
-				<textarea rows="10" cols="100" style="color: black;" id="comments">
-				</textarea>
-				<p> &nbsp </p>
-				<input type="submit" style="color: black;"/>
-				<h1>&nbsp </h1>
-				<hr/>
+                <form method="POST" action="">
+                    {{ render_field(postR.food, class='form-control', required='required') }}
+                    {{ render_field(postR.food_type, class='form-control', required='required') }}
+                </form>
 				<h1>&nbsp </h1>
 				<h1>&nbsp </h1>
 				<h1>&nbsp </h1>
 				<h1>&nbsp </h1>
 				<h1>&nbsp </h1>
 				<h1>&nbsp </h1>
+                <h1>&nbsp </h1>
+                <h1>&nbsp </h1>
+                <h1>&nbsp </h1>
+                <h1>&nbsp </h1>
+                <h1>&nbsp </h1>
+                <h1>&nbsp </h1>
+                <h1>&nbsp </h1>
 			</div>
 		</div>
 
