@@ -11,12 +11,14 @@
 		<link href="/static/css/skeleton.css" rel="stylesheet">
 		<link href="/static/css/community.css" rel="stylesheet">
 		<link href="/static/css/forums.css" rel="stylesheet">
+		<link href="{{ url_for("static", filename="css/skeleton.css") }}" rel="stylesheet">
+        <link href="{{ url_for("static", filename="css/policies.css") }}" rel="stylesheet">
 	</head>
 	<body>
 
 		<nav class="navbar navbar-inverse" id="header" data-spy="affix" data-offset-top="1"><!--TOP-->
 			<div class="navbar-header" id="topLeft">
-				<a href="home.html">
+				<a href="/">
 					<img id="logo" src="/static/images/Logo Reverse.png">
 				</a>
 				<button id="collapse" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topRight">
@@ -29,13 +31,13 @@
 
 			<div class="collapse navbar-collapse navbar-right" id="topRight">
 				<ul class="nav navbar-nav" id="navList">
-					<li><a href="home.html">Home</a></li>
-					<li><a href="recipe.html">Recipe</a></li>
-					<li><a href="health.html">My Health</a></li>
-					<li><a href="fun.html">Fun</a></li>
-					<li class="active1"><a href="community.html">Community</a></li>
+					<li><a href="/">Home</a></li>
+					<li><a href="/recipe">Recipe</a></li>
+					<li><a href="/health">My Health</a></li>
+					<li><a href="/fun">Fun</a></li>
+					<li class="active1"><a href="/community">Community</a></li>
 				</ul>
-				<a type="button" class="btn btn-default" id="loginButton" href="login.html">Sign In</a>
+				<a type="button" class="btn btn-default" id="loginButton" href="/login">Sign In</a>
 			</div>
 		</nav>
 
