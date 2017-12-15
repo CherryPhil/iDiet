@@ -7,35 +7,38 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="icon" href="images/Board.png">
+		<link rel="icon" href="/static/images/Board.png">
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/Home.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+        <link href="{{ url_for("static", filename="css/footer.css") }}" rel="stylesheet">
+        <link href="{{ url_for("static", filename="css/navbar.css") }}" rel="stylesheet">
 	</head>
 	<body>
+
 		<nav class="navbar navbar-inverse" id="header" data-spy="affix" data-offset-top="1"><!--TOP-->
-			<div class="navbar-header" id="topLeft">
-				<a href="home.html">
-					<img id="logo" src="static/images/Logo Reverse.png">
-				</a>
-				<button id="collapse" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topRight">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>                        
-				</button>
-			</div>
-			
-			
-			<div class="collapse navbar-collapse navbar-right" id="topRight">
-				<ul class="nav navbar-nav" id="navList">
-					<li class="active1"><a href="home.html">Home</a></li>
-					<li><a href="recipe.html">Recipe</a></li>
-					<li><a href="health.html">My Health</a></li>	
-					<li><a href="fun.html">Fun</a></li>
-					<li><a href="community.html">Community</a></li>
-				</ul>
-				<button type="button" class="btn btn-default" id="loginButton">Sign In</button>
-			</div>
-		</nav>
+            <div class="navbar-header" id="topLeft">
+                <a href="/">
+                    <img id="logo" src="{{ url_for("static", filename="images/Logo Reverse.png") }}">
+                </a>
+                <button id="collapse" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topRight">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+
+            <div class="collapse navbar-collapse navbar-right" id="topRight">
+                <ul class="nav navbar-nav" id="navList">
+                    <li class="active1"><a href="/">Home</a></li>
+                    <li><a href="/recipe">Recipe</a></li>
+                    <li><a href="/health">My Health</a></li>
+                    <li><a href="/fun">Fun</a></li>
+                    <li><a href="/community">Community</a></li>
+                </ul>
+                <a type="button" class="btn btn-default" id="loginButton" href="/login">Sign In</a>
+            </div>
+        </nav>
 		
 	
 		<div><!--BODY-->
@@ -88,98 +91,110 @@
 				<div class="col-md-7">
 					<div class="row" id="homeRabbit"><!--About Us-->
 						<h2 style="color: white" align="middle">About Us</h2>
-						<div align="center">
-							<p style="color: white">We started on 15 October 2017.</p>
-							<p style="color: white">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
-							<p style="color: white">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
-							<p style="color: white">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
+						<div style="color: white; text-align: center;">
+							<p>iDiet is a long-established health, nutrition and fitness authority that inspires readers to eat smart and live a healthier lifestyle.</p>
+							<p>As a leader in translating cutting-edge nutrition research into recipes and guidance for the home cook, we offer the tools you need to make better choices for everyday healthy living.</p>
+							<p>Each recipe is tested by our staff of Test Kitchens professionals and registered dietitians to meet stringent nutritional requirements and high flavour standards; each story is vetted by our advisory board of leading physicians, nutrition experts, and research specialists.</p>
 						</div>
 					</div>
 					<div class="row"><!--News Announcement-->
-						<h2 style="color: white" align="middle">News Announcement</h2>
-						<div align="center">
-							<p style="color: white">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
-							<p style="color: white">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
-							<p style="color: white">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
-							<p style="color: white">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
+						<h2 style="color: white" align="middle">News Article</h2>
+						<div class="row">
+                            <div class="col-md-6">
+                                <div>
+                                    <h2 id="homeRacoon">Health</h2>
+                                    <div id="homeWhale">
+                                        <p style="text-align: center;"><img id="homeFox" src="static/images/health.jpg"></p>
+                                        <p style="text-align: center;">Do you have a healthy body?</p>
+                                        &nbsp;&nbsp;<button id="homeHog" type="button" class="btn"><a href="/home_health" id="homeBat" >Read More</a></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div>
+                                    <h2 id="homeRacoon">Family & Kids</h2>
+                                    <div id="homeWhale">
+                                        <p style="text-align: center;"><img id="homeFox" src="static/images/family.jpg"></p>
+                                        <p style="text-align: center;">Does you and your family dine well?</p>
+                                        &nbsp;&nbsp;<button id="homeHog" type="button" class="btn">Read More</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div>
+                                    <h2 id="homeRacoon">Travel</h2>
+                                    <div id="homeWhale">
+                                        <p style="text-align: center;"><img id="homeFox" src="static/images/travel.jpg"></p>
+                                        <p style="text-align: center;">Are you able to find healthy food when travelling?</p>
+                                        &nbsp;&nbsp;<button id="homeHog" type="button" class="btn">Read More</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div>
+                                    <h2 id="homeRacoon">Food</h2>
+                                    <div id="homeWhale">
+                                        <p style="text-align: center;"><img id="homeFox" src="static/images/food.jpg"></p>
+                                        <p style="text-align: center;">Are you eating healthily?</p>
+                                        &nbsp;&nbsp;<button id="homeHog" type="button" class="btn">Read More</button>
+                                    </div>
+                                </div>
+                            </div>
 						</div>
 					</div>
+                    <br>
+                    <br>
 				</div>
+
+
 				<div class="col-md-5">
 					<div class="row" id="homeLion"><!--Update New Recipe-->
-						
+						<h2 style="color: white" align="middle">New Recipe</h2>
 					</div>
+                    <div id="homeZebra" class="container-fluid">
+                        {% for i in list %}
+                            <a id="homePig" href="/recipe">
+                                <div id="homeCow" class="col-md-6">
+                                    <img id="homeDuck" src="/static/images/food/{{ i["photo"] }}">
+                                    <p><b>Name: </b> {{ i["name"] }}</p>
+                                    <p><b>Calorie: </b>{{ i["cal"] }}</p>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+
 					<div class="row" id="homePanda"><!--Social Media Feed-->
+                        <h2 style="color: white" align="middle">Social Media</h2>
 					</div>
+                    <div class="col-md-3">
+                        <div id="homeOtter">
+                            <span class="glyphicon glyphicon-user"></span><h6>John Tan</h6>
+                            <p>Nice Recipe:)</p>
+                            <img id="homeChicken" src="static/images/a.jpg">
+                        </div>
+                        <br>
+                        <div id="homeOtter">
+                            <span class="glyphicon glyphicon-user"></span><h6>Harron Lim</h6>
+                            <p>Thanks for the recipe!!</p>
+                            <img id="homeChicken" src="static/images/b.jpg">
+                        </div>
+                        <br>
+                        <div id="homeOtter">
+                            <span class="glyphicon glyphicon-user"></span><h6>Yuki Wong</h6>
+                            <p>Really appreciated it alot!!</p>
+                            <img id="homeChicken" src="static/images/c.jpg">
+                        </div>
+                        <br>
+                        <div id="homeOtter">
+                            <span class="glyphicon glyphicon-user"></span><h6>James Poh</h6>
+                            <p>It helps alottttttt..</p>
+                            <img id="homeChicken" src="static/images/d.jpg">
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div>
-		
-		
-		<div class="container-fluid" id="bottomTop">
-			<div class="container">
-				<div class="col-md-3">
-					<ul id="contactList">
-						<li><strong>CONTACT US</strong></li>
-						<br/>
-						<li><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;39 Artillery Avenue, Sentosa<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Singapore 099958</li>
-						<br/>
-						<li><span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;+65 6823 9999</li>
-						</br>
-						<li><span class="glyphicon glyphicon-phone-alt"></span>&nbsp;&nbsp;+65 6448 9999</li>
-						<br/>
-						<li><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;<a id="bottomEmail" href="mailto:contactus@iDiet.com.sg">contactus@iDiet.com.sg</a></li>
-					</ul>
-				</div>
-				<div class="col-md-3">
-					<ul id="siteList">
-						<li><strong>SITEMAP</strong></li>
-						<br/>
-						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="recipe.html">Recipe</a></li>
-						<br/>
-						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="health.html">My Health</a></li>
-						<br/>
-						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="fun.html">Fun</a></li>
-						<br/>
-						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="announcements.html">Announcements</a></li>
-						<br/>
-						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="forums.html">Forums</a></li>
-						<br/>
-						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="support.html">Support</a></li>
-					</ul>
-				</div>
-				<div class="col-md-3">
-					<ul id="policiesList">
-						<li><strong>POLICIES</strong></li>
-						<br/>
-						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="terms&conditions.html">Terms & Conditions</a></li>
-						<br/>
-						<li><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;<a href="privacy.html">Privacy</a></li>
-					</ul>
-				</div>
-				<div class="col-md-3">
-					<ul id="sponsorsList">
-						<li><strong>SPONSORS</strong></li>
-						<br/>
-						<li><img id="sponsors" src="images/sponsors.png"></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="container-fluid" id="bottomBot">
-			<div class="container">
-				<div class="col-md-6">
-					<ul id="socialList">
-						<li><strong>Follow Us On</strong></li>
-						<li><a target="_blank" href="https://www.facebook.com/">Facebook</a></li>
-						<li><a target="_blank" href="https://www.instagram.com/?hl=en">Instragram</a></li>
-						<li><a target="_blank" href="https://twitter.com/?lang=en">Twitter</a></li>
-					</ul>
-				</div>
-				<div class="col-md-4 col-md-offset-2">
-					<p id="copyright">Copyright © 2017 iDiet.com.sg. All rights reserved.</p>
-				</div>
-			</div>
-		</div>
+
+		{% include 'includes/_footer.html' %}
 	</body>
 </html>
