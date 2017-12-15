@@ -39,23 +39,39 @@ var challengeScore1 = -1;
 var challengeScore2 = -1;
 var challengeScore3 = -1;
 
+//Set value from database
 function setCha1_2_3(cha1, cha2, cha3){
     challengeScore1 = cha1;
+    if(challengeScore1 == 5){$("#OutsideAchieve1").attr("src", "static/images/unAchievement1.png")}
     challengeScore2 = cha2;
+    if(challengeScore2 == 5){$("#OutsideAchieve2").attr("src", "static/images/unAchievement2.png")}
     challengeScore3 = cha3;
+    if(challengeScore3 == 5){$("#OutsideAchieve3").attr("src", "static/images/unAchievement3.png")}
 }
+
 
 var questions = question;
 var question_choices = question_choice;
 
+//3 set of code that replace information in modal box based on different button clicked
+//- Set question & multiple choice base on different button clicked
+//- Set achievement image
+//- Set score text
+//- Refresh the question and multiple choice by calling restartFunc()
 $("#challengeButton").click(function(){
     questions = question;
     question_choices = question_choice;
     $("#challengeNumber").text("1");
+    $("#achievements").attr("src", "static/images/Achievement1.png");
     if(challengeScore1 == -1){
         $("#showScore").text("No previous records")
+    }else if(challengeScore1 == -2) {
+        $("#showScore").text("Login to store your score!")
     }else{
-        $("#showScore").text("Your highest score: "+challengeScore1+"/5")
+        $("#showScore").text("Your highest score: "+challengeScore1+"/5");
+        if(challengeScore1 == 5){
+            $("#achievements").attr("src", "static/images/unAchievement1.png");
+        }
     }
     restartFunc();
 });
@@ -63,10 +79,16 @@ $("#challengeButton2").click(function(){
     questions = question2;
     question_choices = question_choice2;
     $("#challengeNumber").text("2");
+    $("#achievements").attr("src", "/static/images/Achievement2.png");
     if(challengeScore2 == -1){
         $("#showScore").text("No previous records")
+    }else if(challengeScore2 == -2) {
+        $("#showScore").text("Login to store your score!")
     }else{
-        $("#showScore").text("Your highest score: "+challengeScore2+"/5")
+        $("#showScore").text("Your highest score: "+challengeScore2+"/5");
+        if(challengeScore2 == 5){
+            $("#achievements").attr("src", "/static/images/unAchievement2.png");
+        }
     }
     restartFunc();
 });
@@ -74,15 +96,22 @@ $("#challengeButton3").click(function(){
     questions = question3;
     question_choices = question_choice3;
     $("#challengeNumber").text("3");
+    $("#achievements").attr("src", "static/images/Achievement3.png");
     if(challengeScore3 == -1){
         $("#showScore").text("No previous records")
+    }else if(challengeScore3 == -2) {
+        $("#showScore").text("Login to store your score!")
     }else{
-        $("#showScore").text("Your highest score: "+challengeScore3+"/5")
+        $("#showScore").text("Your highest score: "+challengeScore3+"/5");
+        if(challengeScore3 == 5){
+            $("#achievements").attr("src", "static/images/unAchievement3.png");
+        }
     }
     restartFunc();
 });
 
 
+//Restart question shown and multiple choices
 var count = 0;
 var score = 0;
 function restartFunc(){
@@ -105,6 +134,9 @@ function restartFunc(){
     $("#modalBodyNext").text("Next Question");
 };
 
+//Validate if user got tick radio button
+//Alert text when finish, and accumulate score if correct
+//Update score to database by .getJSON
 function hi(){
     if($("#A").prop("checked") == false && $("#B").prop("checked") == false && $("#C").prop("checked") == false && $("#D").prop("checked") == false){
         $("#errorMessage").css("display", "block");
@@ -132,10 +164,16 @@ function hi(){
             function(data){
             if($("#challengeNumber").text() == 1){
                 challengeScore1 = data;
+                if(data == 5){$("#OutsideAchieve1").attr("src", "static/images/unAchievement1.png")}
+                showAchievementAlert("static/images/unAchievement1.png", "POWDER POWER");
             }else if($("#challengeNumber").text() == 2){
                 challengeScore2 = data;
+                if(data == 5){$("#OutsideAchieve2").attr("src", "static/images/unAchievement2.png")}
+                showAchievementAlert("static/images/unAchievement2.png", "DESERVING DINER");
             }else{
                 challengeScore3 = data;
+                if(data == 5){$("#OutsideAchieve3").attr("src", "static/images/unAchievement3.png")}
+                showAchievementAlert("static/images/unAchievement3.png", "BEAK BECKONING");
             }});
         $('#challengeModal').modal("toggle");
     }
@@ -148,4 +186,12 @@ function hi(){
     $("#C3").text(question_choices[count][2]);
     $("#C4").text(question_choices[count][3]);
     }
+}
+
+
+function showAchievementAlert(url, text){
+    $("#AlertAchievement").attr("src", url);
+    $("#AlertText").text(text);
+    $("#UnlockAlertBox").fadeIn("slow");
+    setTimeout(function(){$("#UnlockAlertBox").fadeOut("slow");}, 3000);
 }
