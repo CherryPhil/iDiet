@@ -1,14 +1,16 @@
 window.onload = function () {
 	var chart = new CanvasJS.Chart("chartContainer", {
+	    animationEnabled:true,
 		title: {
 			text: "Your BMI Progress"
 		},
         axisX:{
-		    title:"Months"
-
+		    title:"Months",
+			titleFontSize:25
         },
         axisY: {
             title: "B M I",
+			titleFontSize:25,
             includeZero: false
         },
 		data: [
@@ -33,6 +35,7 @@ window.onload = function () {
     }
 	else {
         chart.options.data[0].dataPoints.push({y: parseInt(document.getElementById("newdp").value)});
+        localStorage.setItem("data",chart.options.data[0].dataPoints);
         chart.render();
     }
 	});
