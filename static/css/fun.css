@@ -36,6 +36,12 @@
 	text-align: center;
 	background-color: #A0A0A0;
 }
+.achievements{
+	width: 50px;
+	position: absolute;
+	left: 140px;
+	bottom: 5px;
+}
 #challengeButton, #challengeButton2, #challengeButton3{
 	background: 0 0;
 	background-color: #404040;
@@ -45,6 +51,7 @@
 	color: white;
 	border-color: white;
     transition: all .2s ease-in-out;
+	position: relative;
 }
 #challengeButton:hover, #challengeButton2:hover, #challengeButton3:hover {
 	background-color: #FF8000;
@@ -71,6 +78,9 @@
 #modalTopText1{
 	font-size: 20px;
 }
+#achievements{
+	width: 50%;
+}
 
 #errorMessage{
 	color: red;
@@ -95,4 +105,34 @@
 
 #modalProgress{
 	width: 0%;
+}
+
+/*Alert Achievement*/
+#containerCon{
+	position: fixed;
+	bottom: 30px;
+	width: 100%;
+}
+#UnlockAlertBox{
+	display: none;
+	background-color: #556666;
+	width: 250px;
+	height: 50px;
+	color: white;
+	border-radius: 25px;
+	margin: 0 auto;
+}
+#AlertAchievement{
+	width: 48px;
+	position: relative;
+	left: -12px;
+	padding-top: 1px;
+}
+#AlertUnlock{
+	font-weight: bold;
+	padding-top: 5px;
+	margin-bottom: 0px;
+}
+#AlertText{
+	font-size: 13px;
 }
