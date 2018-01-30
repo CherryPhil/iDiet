@@ -53,7 +53,12 @@ def Recipe():
     for i in database_recipes:
         recipe_detail = database_recipes[i]
         name.append(recipe_detail)
-    return render_template('recipe.html', name=name)
+    try:
+        userId = session["logged_in"]
+    except KeyError:
+        return render_template("recipe.html", name=name)
+    users = root.child("users/" + userId).get()
+    return render_template("recipe.html", name=name, user=users)
 
 #HEALTH
 @app.route("/health")
