@@ -1,3 +1,136 @@
+//////////////////////////////////////////////////////////////FUN FACT//////////////////////////////////////////////////////////////
+/*
+Did you know that only doing crunches will not get rid of belly fat?|Unfortunately we can’t spot reduce.  The best way to target abdominal fat is to reduce your overall body fat, which means plenty of cardio, combined with strength training. Stick to it, because oftentimes the first place you gain weight is the last place you lose it.
+Did you know that eating after 8 doesn’t necessarily mean you’ll gain weight?|The fact is: what you eat, how much you eat, and how much physical activity you do determines whether you gain or lose weight.  Morning noon or night, when you eat too much your body stores excess calories as fat.
+Did you know that exercise could help reduce anxiety?|Exercise provides distraction, reduces muscle tension, improves resilience, builds brain resources, and sets you free from disabling thoughts and emotions.  Exercise frees your mind and helps you take action.
+Did you know that effective goal setting is still one of the most proven methods for losing weight and breaking exercise plateaus?|Exercise alleviates the ambiguity of “doing your best” or “trying your hardest.”  Specific, challenging goals lead to better performance and more commitment.
+Dieting dulls the mind.|Studies have shown there is a link between dieting and mental performance. The reduction in working memory capacity occurs because slimmers' brains are so preoccupied with dieting that other brain processes don't get a look in.
+Did you know that if you’re trying to lose weight, the three most helpful sections of the food label are right at the top: Serving size, servings per container, and calories per serving?|Read the label and be careful. If there are two servings and you eat both, unfortunately you double the calories, double the fat, and double the trouble.
+Did you know that we are all motivated to exercise and stay healthy for different reasons?|It’s also important to recognize that our motivations may change over time. Being clear about your motivations and embracing the types of exercise that you enjoy and make you feel successful are key factors toward adherence.
+Breakfast is the most important meal and eating it can help lose weight.|The body's internal chemistry is at its most active first thing in the morning, so anything eaten then will be used to the maximum.
+Drinking a litre of water everyday helps dieting.|Not only does water flush out and purify the system but drinking a glass of water 30 minutes before a meal helps weight loss. It fills up the stomach and makes you eat less.
+*/
+
+var funFact = [];
+var seen = [];
+var possibilityXY = ["Y", "X"];
+var possibilityXDegree = ["-90deg", "90deg", "0deg"];
+var possibilityYDegree = ["180deg", "90deg", "-90deg"];
+var axis = "X";
+var degree = "0deg";
+var randomIndex;
+var previousIndex;
+var previous = "rotateX(0deg)";
+var updateThis = "";
+
+//Set fun facts details into a list
+function setFunFacts(data){
+    funFact = data;
+    randomIndex = Math.floor(Math.random() * (funFact.length));
+    previousIndex = randomIndex;
+    var factDetail = allFunFacts[randomIndex].split("|");
+    $("#X0deg").html("<b>"+factDetail[0]+"</b><hr/><p>"+factDetail[1]+"</p>");
+    $("#fun1Max").text(funFact.length);
+}
+
+//Update data on first refresh (run once)
+function setFactsSeen(data){
+    for(i = 0; i < data.length; i++){//Check for any changes in the Facts, if yes, reset achievement.
+        if(funFact.includes(data[i]) == false){
+            data = [-1];
+        }
+    }
+    if(data[0] == -1){
+        seen = [];
+    }else{
+        seen = data;
+        checkAchievement(0);
+    }
+    if(seen.includes(funFact[randomIndex]) != true){
+        seen.push(funFact[randomIndex]);
+        checkAchievement(1);
+    }
+    for(i = 0; i < seen.length; i++){
+        updateThis = updateThis + "*";
+        updateThis = updateThis + seen[i];
+    }
+    $.getJSON("/achievement4",{stringSeen: updateThis},function(data){
+        if(data == false){
+            $("#fun1BotText").text("Log in to get achievement!");
+        }else{
+            seen = data;
+            $("#fun1Seen").text(seen.length);
+        }
+    });
+}
+
+//When clicked, change funfacts content, remove funfacts content from previous box, update data
+var clickScene = true;
+$(".scene").click(function(){
+    if(clickScene){
+        clickScene = false;
+        setTimeout(function(){clickScene = true}, 3000);//set timeout to click cube 1 time every 3 sec
+        $("#"+axis+degree).html("");
+        while(true) {
+            var flipSound = new Audio("/static/sound/flip.wav");
+            flipSound.play();
+            flipSound.currentTime=0;
+            axis = possibilityXY[Math.floor(Math.random() * possibilityXY.length)];
+            if (axis == "Y") {
+                degree = possibilityYDegree[Math.floor(Math.random() * possibilityYDegree.length)];
+            } else if (axis == "X") {
+                degree = possibilityXDegree[Math.floor(Math.random() * possibilityXDegree.length)];
+            }
+            if (previous != "rotate"+axis+"("+degree+")"){
+                break;
+            }
+        }
+
+        while(true){
+            randomIndex = Math.floor(Math.random() * (funFact.length));
+            if(randomIndex != previousIndex){
+                break;
+            }
+        }
+        if(seen.includes(funFact[randomIndex]) != true){
+            seen.push(funFact[randomIndex]);
+            checkAchievement(1);
+        }
+        //Update to database
+        updateThis = "";
+        for(i = 0; i < seen.length; i++){
+            updateThis = updateThis + "*";
+            updateThis = updateThis + seen[i];
+        }
+        $.getJSON("/achievement4",{stringSeen: updateThis},function(data){
+            if(data == false){
+                $("#fun1BotText").text("Log in to get achievement!");
+            }else{
+                seen = data;
+                $("#fun1Seen").text(seen.length);
+            }
+        });
+        var factDetail = allFunFacts[randomIndex].split("|");
+        $("#"+axis+degree).html("<b>"+factDetail[0]+"</b><hr/><p>"+factDetail[1]+"</p>");
+        previousIndex = randomIndex;
+
+        previous = "rotate"+axis+"("+degree+")";
+        $(".cube").css("transform", "rotate"+axis+"("+degree+")");
+    }
+});
+
+function checkAchievement(number){
+    if(user != null){
+        if(seen.length == funFact.length){
+            $("#fun1Achievement").attr("src", "static/images/unAchievement4.png");
+            if(number == 1){
+                showAchievementAlert("static/images/unAchievement4.png", "FACTORIOUS FOOLERY");
+            }
+        }
+    }
+}
+
+//////////////////////////////////////////////////////////////QUIZ//////////////////////////////////////////////////////////////
 var question = [["Maximum carbohydrates are obtained from:", "A"],
                 ["Vitamins, minerals and proteins in suitable amounts are given to body by:", "D"],
                 ["According to food guide pyramid fats oils and sweets should be used:", "C"],
@@ -132,7 +265,7 @@ function restartFunc(){
     $("#D").prop("checked", false);
     $("#errorMessage").css("display", "none");
     $("#modalBodyNext").text("Next Question");
-};
+}
 
 //Validate if user got tick radio button
 //Alert text when finish, and accumulate score if correct
@@ -163,17 +296,23 @@ function hi(){
             {userScore: score, Qnum: $("#challengeNumber").text()},
             function(data){
             if($("#challengeNumber").text() == 1){
+                if(data == 5){
+                    $("#OutsideAchieve1").attr("src", "static/images/unAchievement1.png");
+                    if(challengeScore1 != 5){showAchievementAlert("static/images/unAchievement1.png", "POWDER POWER");}
+                    }
                 challengeScore1 = data;
-                if(data == 5){$("#OutsideAchieve1").attr("src", "static/images/unAchievement1.png")}
-                showAchievementAlert("static/images/unAchievement1.png", "POWDER POWER");
             }else if($("#challengeNumber").text() == 2){
+                if(data == 5){
+                    $("#OutsideAchieve2").attr("src", "static/images/unAchievement2.png");
+                    if(challengeScore2 != 5){showAchievementAlert("static/images/unAchievement2.png", "DESERVING DINER");}
+                    }
                 challengeScore2 = data;
-                if(data == 5){$("#OutsideAchieve2").attr("src", "static/images/unAchievement2.png")}
-                showAchievementAlert("static/images/unAchievement2.png", "DESERVING DINER");
             }else{
+                if(data == 5){
+                    $("#OutsideAchieve3").attr("src", "static/images/unAchievement3.png");
+                    if(challengeScore3 != 5){showAchievementAlert("static/images/unAchievement3.png", "BEAK BECKONING");}
+                    }
                 challengeScore3 = data;
-                if(data == 5){$("#OutsideAchieve3").attr("src", "static/images/unAchievement3.png")}
-                showAchievementAlert("static/images/unAchievement3.png", "BEAK BECKONING");
             }});
         $('#challengeModal').modal("toggle");
     }
@@ -190,8 +329,208 @@ function hi(){
 
 
 function showAchievementAlert(url, text){
+    var achievementSound = new Audio("/static/sound/achievement.wav");
+    achievementSound.play();
+    achievementSound.currentTime=0;
     $("#AlertAchievement").attr("src", url);
     $("#AlertText").text(text);
     $("#UnlockAlertBox").fadeIn("slow");
     setTimeout(function(){$("#UnlockAlertBox").fadeOut("slow");}, 3000);
+}
+
+//////////////////////////////////////////////////////////////ADMIN USES//////////////////////////////////////////////////////////////
+function adminUses(allFunFacts){//Add table row of fun facts
+    for(i = 0; i < allFunFacts.length; i++) {
+        var data = allFunFacts[i].split("|");
+        var row = document.createElement("tr");
+        row.setAttribute("id", "row" + i);
+
+        var col0 = document.createElement("th");
+        col0.appendChild(document.createTextNode(i + 1));
+        row.appendChild(col0);
+
+        var col1 = document.createElement("td");
+        col1.setAttribute("id", "colFact" + i);
+        col1.appendChild(document.createTextNode(data[0]));
+        row.appendChild(col1);
+
+        var col2 = document.createElement("td");
+        col2.setAttribute("id", "colDetail" + i);
+        col2.appendChild(document.createTextNode(data[1]));
+        row.appendChild(col2);
+
+        var col3 = document.createElement("td");
+        var editButton = document.createElement("a");
+        editButton.setAttribute("id", "edit" + i);
+        editButton.setAttribute("class", "editButtons");
+        editButton.setAttribute("onclick", "editClick(this)");
+        editButton.appendChild(document.createTextNode("Edit"));
+        col3.appendChild(editButton);
+        var deleteButton = document.createElement("a");
+        deleteButton.setAttribute("id", "delete" + i);
+        deleteButton.setAttribute("class", "deleteButtons");
+        deleteButton.setAttribute("onclick", "deleteClick(this)");
+        deleteButton.appendChild(document.createTextNode("Delete"));
+        col3.appendChild(deleteButton);
+        row.appendChild(col3);
+
+        document.getElementById("tableBody").appendChild(row);
+    }
+}
+
+//////////////////////////EDIT
+function editClick(deEdit){
+    if($(".saveButtons")[0] != null){
+        var bool = confirm("This action will not save your current changes made, confirm?");
+        if(bool == false){
+            return;
+        }
+        cancelClick($(".saveButtons")[0]);
+    }else if($(".noSaveButton")[0] != null){
+        cancelClick($(".noSaveButton")[0]);
+    }
+    var Num = deEdit.getAttribute("id").match(/\d/g).join("");
+    var Fact = $("#colFact"+Num).html();
+    $("#colFact"+Num).html("<textarea id='inputFact"+Num+"' placeholder='Write facts here...' onkeyup='activateSave(this)' maxlength='200'/>");//Change the Fact to an Input
+    $("#inputFact"+Num).val(Fact);
+    var Detail = $("#colDetail"+Num).html();
+    $("#colDetail"+Num).html("<textarea id='inputDetail"+Num+"' placeholder='Write details here...' onkeyup='activateSave(this)' maxlength='200'/>");//Change the Detail to an Input
+    $("#inputDetail"+Num).val(Detail);
+
+    $("#inputFact"+Num).focus();
+
+    $("#edit"+Num).attr("class", "noSaveButton")//Change Edit button to Save button
+        .attr("onclick", "saveClick(this)")
+        .text("Save")
+        .attr("id", "save"+Num);
+
+    $("#delete"+Num).attr("class", "cancelButtons")//Change Delete button to Cancel button
+        .attr("onclick", "cancelClick(this)")
+        .text("Cancel")
+        .attr("id", "cancel"+Num);
+}
+
+function activateSave(deInput){//Changing ONLY the aesthetics of the Save button
+    var Num = deInput.getAttribute("id").match(/\d/g).join("");
+    var Fact, Detail;
+    if(Num >= allFunFacts.length){
+    }else{
+        var data = allFunFacts[Num].split("|");
+        Fact = data[0];
+        Detail = data[1];
+    }
+    var newFact = $("#inputFact"+Num).val();
+    var newDetail = $("#inputDetail"+Num).val();
+    if(newFact == "" || newDetail == "" || (Fact == newFact && Detail == newDetail)){
+        $("#save"+Num).attr("class", "noSaveButton");
+    }else{
+        $("#save"+Num).attr("class", "saveButtons");
+    }
+}
+
+//////////////////////////DELETE
+function deleteClick(deDelete){
+    var Num = deDelete.getAttribute("id").match(/\d/g).join("");
+    var bool = confirm("Deleting row "+(parseInt(Num)+1)+", confirm?");
+    if(bool == true){
+        var newFunFacts = "";
+        for(i = parseInt(Num)+1; i < allFunFacts.length; i++){
+            newFunFacts = newFunFacts + "\\";
+            var Fact = $("#colFact"+i).text();
+            var Detail = $("#colDetail"+i).text();
+            newFunFacts = newFunFacts + (Fact+"|"+Detail)
+        }
+        $.getJSON("/deleteFact", {newFunFacts: newFunFacts, num: Num}, function(bool){
+            if(bool){
+                location.reload();
+            }
+        })
+    }
+}
+
+//////////////////////////SAVE
+function saveClick(deSave){
+    var Num = deSave.getAttribute("id").match(/\d/g).join("");
+    var Fact, Detail;
+    if(Num >= allFunFacts.length){
+    }else{
+        var data = allFunFacts[Num].split("|");
+        Fact = data[0];
+        Detail = data[1];
+    }
+    var newFact = $("#inputFact"+Num).val();
+    var newDetail = $("#inputDetail"+Num).val();
+    if(newFact == "" || newDetail == "" || (Fact == newFact && Detail == newDetail)){return;}
+    $.getJSON("/updateFact", {fact: newFact, detail: newDetail, num: Num}, function(bool){
+        if(bool){
+            location.reload();
+        }
+    });
+}
+
+//////////////////////////CANCEL
+function cancelClick(deCancel){
+    var Num = deCancel.getAttribute("id").match(/\d/g).join("");
+    var Fact, Detail;
+    if(Num >= allFunFacts.length){
+        document.getElementById("tableBody").deleteRow(Num);
+    }else{
+        var data = allFunFacts[Num].split("|");
+        Fact = data[0];
+        Detail = data[1];
+
+        $("#colFact"+Num).html(Fact);
+        $("#colDetail"+Num).html(Detail);
+
+        $("#save"+Num).attr("class", "editButtons")
+            .attr("onclick", "editClick(this)")
+            .text("Edit")
+            .attr("id", "edit"+Num);
+
+        $("#cancel"+Num).attr("class", "deleteButtons")
+            .attr("onclick", "deleteClick(this)")
+            .text("Delete")
+            .attr("id", "delete"+Num);
+    }
+}
+
+//////////////////////////ADD ROW
+function addRow(){
+    if($(".saveButtons")[0] != null){
+        var bool = confirm("This action will not save your current changes made, confirm?");
+        if(bool == false){
+            return;
+        }
+        cancelClick($(".saveButtons")[0]);
+    }else if($(".noSaveButton")[0] != null){
+        cancelClick($(".noSaveButton")[0]);
+    }
+
+    var row = document.createElement("tr");
+    var newNumber = $("tbody > tr").length;
+    var newNumberShown = newNumber + 1;
+    row.setAttribute("id", "row"+newNumber);
+
+    var col0 = document.createElement("th");
+    col0.appendChild(document.createTextNode(newNumberShown));
+    row.appendChild(col0);
+
+    var col1 = document.createElement("td");
+    col1.setAttribute("id", "colFact" + newNumber);
+    col1.innerHTML = "<textarea id='inputFact"+newNumber+"' placeholder='Write facts here...' onkeyup='activateSave(this)' maxlength='200'/>";
+    row.appendChild(col1);
+
+    var col2 = document.createElement("td");
+    col2.setAttribute("id", "colDetail" + newNumber);
+    col2.innerHTML = "<textarea id='inputDetail"+newNumber+"' placeholder='Write details here...' onkeyup='activateSave(this)' maxlength='300'/>";
+    row.appendChild(col2);
+
+    var col3 = document.createElement("td");
+    col3.innerHTML = "<a id='save"+newNumber+"' class='noSaveButton' onclick='saveClick(this)'>Save</a>" +
+        "<a id='cancel"+newNumber+"' class='cancelButtons' onclick='cancelClick(this)'>Cancel</a>";
+    row.appendChild(col3);
+
+    document.getElementById("tableBody").appendChild(row);
+
+    $("#inputFact"+newNumber).focus();
 }
