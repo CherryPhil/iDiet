@@ -7,18 +7,18 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="icon" href="/static/images/Board.png">
-		<link href="/static/css/footer.css" rel="stylesheet">
-        <link href="/static/css/navbar.css" rel="stylesheet">
-        <link href="/static/css/skeleton.css" rel="stylesheet">
-        <link href="/static/css/policies.css" rel="stylesheet">
+		<link rel="icon" href="{{ url_for("static", filename="images/Board.png") }}">
+		<link href="{{ url_for("static", filename="css/footer.css") }}" rel="stylesheet">
+        <link href="{{ url_for("static", filename="css/navbar.css") }}" rel="stylesheet">
+		<link href="{{ url_for("static", filename="css/skeleton.css") }}" rel="stylesheet">
+        <link href="{{ url_for("static", filename="css/policies.css") }}" rel="stylesheet">
 	</head>
 	<body>
 
 		<nav class="navbar navbar-inverse" id="header" data-spy="affix" data-offset-top="1"><!--TOP-->
             <div class="navbar-header" id="topLeft">
                 <a href="/">
-                    <img id="logo" src="/static/images/Logo Reverse.png">
+                    <img id="logo" src="{{ url_for("static", filename="images/Logo Reverse.png") }}">
                 </a>
                 <button id="collapse" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topRight">
                     <span class="icon-bar"></span>
@@ -41,7 +41,7 @@
         </nav>
 		
 		<div id="policiesTop"><!--BODY-->
-			<img id="policiesTopImage" src="/static/images/policies.jpg">
+			<img id="policiesTopImage" src="{{ url_for("static", filename="images/policies.jpg") }}">
 			<div id="policiesTopTextBox">
 				<p id="policiesTopText">Terms & Conditions</p>
 			</div>
