@@ -13,8 +13,6 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/article.css') }}">
-
-
 	</head>
 	<body>
 
@@ -40,7 +38,7 @@
                     <li><a href="/community">Community</a></li>
                 </ul>
                 {% if user != null %}
-                    <div id="usernameBox" class="dropdown-toggle" data-toggle="dropdown" style="background-color: {{ user["displaypicturecolor"] }}">
+                    <div id="usernameBox" class="dropdown-toggle" data-toggle="dropdown">
                         <img id="displayPic" src={{ user["displaypicture"] }}>
                     </div>
                     <ul id="profileDropdown" class="dropdown-menu">
@@ -68,9 +66,9 @@
         <br>
         <br>
         <br>
-	    <div style="color: white; text-align: center; "> <!--Content-->
-            <h1>Health</h1>
-            <img id="healthBug"  src="/static/images/w.jpg">
+        <div style="color: white; text-align: center; "> <!--Content-->
+            <h1>Food</h1>
+            <img id="healthBug"  src="/static/images/z.png">
         </div>
         <div id="healthLizard">
             <hr>
@@ -110,6 +108,7 @@
         </div>
 
 		{% include 'includes/_footer.html' %}
+
         <script>
             $("#healthHippo").click(function(){
                 $("#article_header").val($("#title").text());
@@ -119,10 +118,12 @@
             $("#updateButton").click(function(){
                 var header = $("#article_header").val();
                 var content = $("#article_content").val();
-                $.getJSON("/articleUpdate",{header: header, content: content, direct: "health"}, function(){
+                $.getJSON("/articleUpdate",{header: header, content: content, direct: "food"}, function(){
                     location.reload();
                 })
             })
         </script>
+
+
 	</body>
 </html>
