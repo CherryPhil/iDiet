@@ -52,11 +52,16 @@ def home():
             home_recipe.append(getRecipe[iterate])
 
     try:
-        userId = session["logged_in"]
+        adminID = session["logged_in_admin"]
     except KeyError:
-        return render_template("home.html", list=home_recipe)
-    users = root.child("users/" + userId).get()
-    return render_template("home.html", list=home_recipe, user=users)
+        try:
+            userId = session["logged_in"]
+        except KeyError:
+            return render_template("home.html", list=home_recipe)
+        users = root.child("users/" + userId).get()
+        return render_template("home.html", list=home_recipe, user=users)
+    adminData = root.child("admins/" + adminID).get()
+    return render_template("home.html", list=home_recipe, admin=adminData)
 
 @app.route('/home/home_health', methods=['POST', 'GET'])
 def home_health():
@@ -181,7 +186,7 @@ def add_recipe():
 
         forBMI = addR.forBMI.data.split("-")
         forBMI2 = []
-        for i in range(int(forBMI[0]),int(forBMI[1]+1)):
+        for i in range(int(forBMI[0]),int(forBMI[1])+1):
             forBMI2.append(str(i))
         forBMI2 = ",".join(forBMI2)
         prepItem = addR.prepItem.data
@@ -457,7 +462,7 @@ def community():
     adminData = root.child("admins/" + adminID).get()
     return render_template("community.html", admin=adminData)
 
-@app.route('/community/announcements', methods=['GET'])#Credit to Sugianto
+@app.route('/community/announcements', methods=['GET'])
 def announcements():
     postsA = root.child("announcements").get()
 
@@ -956,11 +961,31 @@ def update_dp():
 #OTHERS (SUGIANTO)
 @app.route("/privacy")
 def privacy():
-    return render_template("privacy.html")
+    try:
+        adminID = session["logged_in_admin"]
+        adminData = root.child("admins/" + adminID).get()
+    except KeyError:
+        try:
+            userId = session["logged_in"]
+            users = root.child("users/" + userId).get()
+        except KeyError:
+            return render_template("privacy.html")
+        return render_template("privacy.html", user=users)
+    return render_template("privacy.html", admin=adminData)
 
 @app.route("/terms&conditions")
 def terms_and_conditions():
-    return render_template("terms&conditions.html")
+    try:
+        adminID = session["logged_in_admin"]
+        adminData = root.child("admins/" + adminID).get()
+    except KeyError:
+        try:
+            userId = session["logged_in"]
+            users = root.child("users/" + userId).get()
+        except KeyError:
+            return render_template("terms&conditions.html")
+        return render_template("terms&conditions.html", user=users)
+    return render_template("terms&conditions.html", admin=adminData)
 
 
 if __name__ == "__main__":
